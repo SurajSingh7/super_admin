@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Layout, Menu, theme } from "antd";
 import { 
   DashboardOutlined, 
+  HomeFilled,
   HomeOutlined, 
   UserOutlined, 
   SettingOutlined,
@@ -31,6 +32,7 @@ const Sidebar = ({ status, func }) => {
 
   const icons = [
     <HomeOutlined key="home" />,
+    <HomeFilled key="portal" />,
     <UserOutlined key="user" />,
     <SettingOutlined key="settings" />,
     <DashboardOutlined key="dashboard" />,
@@ -50,7 +52,7 @@ const Sidebar = ({ status, func }) => {
       icon: <FormOutlined style={{ color: selectedKeys.includes("companymaster") ? "black" : "white" }} />,
       label: (
         <Link
-          href="/super-admin/company-master"
+          href="/control-pannel/company-master"
           style={{
             textDecoration: "none",
             color: selectedKeys.includes("companymaster") ? "gray" : "white",
@@ -61,17 +63,17 @@ const Sidebar = ({ status, func }) => {
       ),
     },
     {
-      key: "dashboard",
-      icon: <DashboardOutlined style={{ color: selectedKeys.includes("dashboard") ? "black" : "white" }} />,
+    key: "portal",
+    icon: <HomeFilled style={{ color: selectedKeys.includes("portal") ? "black" : "white" }} />,
       label: (
         <Link
-          href="/employee/dashboard"
+          href={process.env.NEXT_PUBLIC_PORTAL_URL}
           style={{
             textDecoration: "none",
-            color: selectedKeys.includes("dashboard") ? "gray" : "white",
+            color: selectedKeys.includes("poral") ? "gray" : "white",
           }}
         >
-          employee
+          Portal
         </Link>
       ),
     },
@@ -99,26 +101,6 @@ const Sidebar = ({ status, func }) => {
         },
       ],
     },
-    // Dynamic permissions items
-    ...(menuItems && Array.isArray(menuItems) ? 
-      menuItems.map((item, index) => ({
-        key: item._id,
-        icon: React.cloneElement(icons[index % icons.length], {
-          style: { color: selectedKeys.includes(item._id) ? "black" : "white" },
-        }),
-        label: (
-          <Link
-            href={item.resources}
-            style={{
-              textDecoration: "none",
-              color: selectedKeys.includes(item._id) ? "gray" : "white",
-            }}
-          >
-            {item.menuName}
-          </Link>
-        ),
-      })) 
-      : [])
   ];
 
   return (

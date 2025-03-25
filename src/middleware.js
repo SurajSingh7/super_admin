@@ -9,7 +9,7 @@ const token = cookies(req).get("userSession");
 
 if(isPublicPath && token)
     {
-    return NextResponse.redirect(new URL("/super-admin/company-master", req.url));
+    return NextResponse.redirect(new URL("/control-pannel/company-master", req.url));
 
     }
 
@@ -20,5 +20,5 @@ if(isPublicPath && token)
         }
 }
 export const config = {
-  matcher: ['/', '/super-admin/company-master'], // Protect these routes
+  matcher: ['/', '/control-pannel/company-master'], // Protect these routes
 };
