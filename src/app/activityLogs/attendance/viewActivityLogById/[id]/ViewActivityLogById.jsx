@@ -449,31 +449,60 @@ const ViewActivityLogById = ({ id }) => {
                 </div>
               )}
 
-              {log.action === "DELETE" && (
+              {log.action === "DELETE" && changes.attendanceData && (
                 <div className="bg-red-50 border border-red-100 rounded-lg p-4">
                   <div className="flex items-center mb-3">
                     <Trash2 className="w-4 h-4 text-red-600 mr-2" />
-                    <h3 className="text-sm font-medium text-red-800">Record Deleted</h3>
+                    <h3 className="text-sm font-medium text-red-800">Deleted Attendance Record</h3>
                   </div>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     <div>
                       <p className="text-xs text-gray-500">Employee Name</p>
-                      <p className="text-sm font-medium text-gray-900">{requestPayload.name}</p>
+                      <p className="text-sm font-medium text-gray-900">{changes.attendanceData.employeeName || "N/A"}</p>
                     </div>
                     <div>
                       <p className="text-xs text-gray-500">Employee Code</p>
+                      <p className="text-sm font-medium text-gray-900">{changes.attendanceData.employeeCode || "N/A"}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Actual Punch In</p>
+                      <p className="text-sm font-medium text-gray-900">{changes.attendanceData.actualPunchInTime || "N/A"}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">User Punch In Time</p>
+                      <p className="text-sm font-medium text-gray-900">{changes.attendanceData.userPunchInTime || "N/A"}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Actual Punch Out Time</p>
+                      <p className="text-sm font-medium text-gray-900">{changes.attendanceData.actualPunchOutTime || "N/A"}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">User Punch Out Time</p>
+                      <p className="text-sm font-medium text-gray-900">{changes.attendanceData.userPunchOutTime || "N/A"}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Total Hours</p>
+                      <p className="text-sm font-medium text-gray-900">{changes.attendanceData.totalHours || "N/A"}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Device ID</p>
+                      <p className="text-sm font-medium text-gray-900">{changes.attendanceData.deviceId || "N/A"}</p>
+                    </div>
+                    <div>
+                      <p className="text-xs text-gray-500">Shift Completed</p>
                       <p className="text-sm font-medium text-gray-900">
-                        {requestPayload.employeeCode || requestPayload.PersonEmployeeCode}
+                        {changes.attendanceData.isShiftCompleted ? "Yes" : "No"}
                       </p>
                     </div>
                   </div>
 
                   <div className="mt-4 p-3 bg-white rounded border border-red-100">
-                    <p className="text-sm text-gray-500">This record has been permanently deleted from the system.</p>
+                    <p className="text-sm text-gray-500">This record has been soft deleted from the system.</p>
                   </div>
                 </div>
               )}
+
 
               {/* Defaulters Updated Data */}
               {changes.defaultersUpdatedData && (
